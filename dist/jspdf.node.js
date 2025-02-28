@@ -1,7 +1,7 @@
 /** @license
  *
  * jsPDF - PDF Document creation from JavaScript
- * Version 3.0.0 Built on 2025-02-19T09:26:58.792Z
+ * Version 3.0.0-remove-cdn Built on 2025-02-28T18:19:12.487Z
  *                      CommitID 00000000
  *
  * Copyright (c) 2010-2021 James Hall <james@parall.ax>, https://github.com/MrRio/jsPDF
@@ -3913,7 +3913,7 @@ function jsPDF(options) {
           Object.prototype.toString.call(globalObject) === "[object Window]"
         ) {
           var pdfObjectUrl =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js";
+            "";
           var integrity =
             ' integrity="sha512-4ze/a9/4jqu+tX9dfOqJYSvyYd5M6qum/3HpCLr+/Jqf0whc37VUbkpNGHR7/8pSnCFw47T1fmIpwBV7UySh3g==" crossorigin="anonymous"';
 
@@ -4539,7 +4539,7 @@ function jsPDF(options) {
 
     //lang
 
-    var lang = options.lang;
+    options.lang;
 
     //renderingMode
     var renderingMode = -1;
@@ -6891,7 +6891,7 @@ jsPDF.API = {
  * @type {string}
  * @memberof jsPDF#
  */
-jsPDF.version = "3.0.0";
+jsPDF.version = "3.0.0-remove-cdn";
 
 /* global jsPDF */
 
@@ -13593,10 +13593,10 @@ function parseFontFamily(input) {
         matches = rx.exec(value);
         if (matches !== null) {
           var fontStyle = matches[1];
-          var fontVariant = matches[2];
+          matches[2];
           var fontWeight = matches[3];
           var fontSize = matches[4];
-          var lineHeight = matches[5];
+          matches[5];
           var fontFamily = matches[6];
         } else {
           return;
@@ -17491,7 +17491,6 @@ var PNG = (function() {
       delayDen,
       delayNum,
       frame,
-      i,
       index,
       key,
       section,
@@ -17513,7 +17512,7 @@ var PNG = (function() {
       section = function() {
         var _i, _results;
         _results = [];
-        for (i = _i = 0; _i < 4; i = ++_i) {
+        for (_i = 0; _i < 4; ++_i) {
           _results.push(String.fromCharCode(this.data[this.pos++]));
         }
         return _results;
@@ -17566,9 +17565,9 @@ var PNG = (function() {
           }
           data = (frame != null ? frame.data : void 0) || this.imgData;
           for (
-            i = _i = 0;
+            _i = 0;
             0 <= chunkSize ? _i < chunkSize : _i > chunkSize;
-            i = 0 <= chunkSize ? ++_i : --_i
+            0 <= chunkSize ? ++_i : --_i
           ) {
             data.push(this.data[this.pos++]);
           }
@@ -17588,9 +17587,9 @@ var PNG = (function() {
               palShort = palLen - this.transparency.indexed.length;
               if (palShort > 0) {
                 for (
-                  i = _j = 0;
+                  _j = 0;
                   0 <= palShort ? _j < palShort : _j > palShort;
-                  i = 0 <= palShort ? ++_j : --_j
+                  0 <= palShort ? ++_j : --_j
                 ) {
                   this.transparency.indexed.push(255);
                 }
@@ -17651,12 +17650,12 @@ var PNG = (function() {
   }
 
   PNG.prototype.read = function(bytes) {
-    var i, _i, _results;
+    var _i, _results;
     _results = [];
     for (
-      i = _i = 0;
+      _i = 0;
       0 <= bytes ? _i < bytes : _i > bytes;
-      i = 0 <= bytes ? ++_i : --_i
+      0 <= bytes ? ++_i : --_i
     ) {
       _results.push(this.data[this.pos++]);
     }
@@ -18572,7 +18571,7 @@ function GifReader(buf) {
   var global_palette_flag = pf0 >> 7;
   var num_global_colors_pow2 = pf0 & 0x7;
   var num_global_colors = 1 << (num_global_colors_pow2 + 1);
-  var background = buf[p++];
+  buf[p++];
   buf[p++]; // Pixel aspect ratio (unused?).
 
   var global_palette_offset = null;
@@ -25893,7 +25892,7 @@ WebPRiffParser dominikhlbg@gmail.com
     imagearray["frames"] = [];
     if (memcmp(src, src_off, "RIFF", 4)) return;
     src_off += 4;
-    var riff_size = GetLE32(src, src_off) + 8;
+    GetLE32(src, src_off) + 8;
     src_off += 8;
 
     while (src_off < src.length) {
@@ -25910,8 +25909,6 @@ WebPRiffParser dominikhlbg@gmail.com
           if (typeof imagearray["frames"][i] === "undefined")
             imagearray["frames"][i] = {};
           var obj = imagearray["frames"][i];
-          var height = [0];
-          var width = [0];
           obj["src_off"] = alpha_chunk ? alpha_offset : src_off - 8;
           obj["src_size"] = alpha_size + payload_size + 8;
           //var rgba = webpdecoder.WebPDecodeRGBA(src,(alpha_chunk?alpha_offset:src_off-8),alpha_size+payload_size+8,width,height);
@@ -25925,11 +25922,11 @@ WebPRiffParser dominikhlbg@gmail.com
           break;
         case "VP8X":
           var obj = (imagearray["header"] = {});
-          var feature_flags = (obj["feature_flags"] = src[src_off]);
+          (obj["feature_flags"] = src[src_off]);
           var src_off_ = src_off + 4;
-          var canvas_width = (obj["canvas_width"] = 1 + GetLE24(src, src_off_));
+          (obj["canvas_width"] = 1 + GetLE24(src, src_off_));
           src_off_ += 3;
-          var canvas_height = (obj["canvas_height"] =
+          (obj["canvas_height"] =
             1 + GetLE24(src, src_off_));
           src_off_ += 3;
           break;
@@ -25941,35 +25938,28 @@ WebPRiffParser dominikhlbg@gmail.com
 
         case "ANIM":
           var obj = imagearray["header"];
-          var bgcolor = (obj["bgcolor"] = GetLE32(src, src_off));
+          (obj["bgcolor"] = GetLE32(src, src_off));
           src_off_ = src_off + 4;
 
-          var loop_count = (obj["loop_count"] = GetLE16(src, src_off_));
+          (obj["loop_count"] = GetLE16(src, src_off_));
           src_off_ += 2;
           break;
         case "ANMF":
-          var offset_x = 0,
-            offset_y = 0,
-            width = 0,
-            height = 0,
-            duration = 0,
-            blend = 0,
-            dispose = 0,
-            temp = 0;
+          var temp = 0;
           var obj = (imagearray["frames"][i] = {});
-          obj["offset_x"] = offset_x = 2 * GetLE24(src, src_off);
+          obj["offset_x"] = 2 * GetLE24(src, src_off);
           src_off += 3;
-          obj["offset_y"] = offset_y = 2 * GetLE24(src, src_off);
+          obj["offset_y"] = 2 * GetLE24(src, src_off);
           src_off += 3;
-          obj["width"] = width = 1 + GetLE24(src, src_off);
+          obj["width"] = 1 + GetLE24(src, src_off);
           src_off += 3;
-          obj["height"] = height = 1 + GetLE24(src, src_off);
+          obj["height"] = 1 + GetLE24(src, src_off);
           src_off += 3;
-          obj["duration"] = duration = GetLE24(src, src_off);
+          obj["duration"] = GetLE24(src, src_off);
           src_off += 3;
           temp = src[src_off++];
-          obj["dispose"] = dispose = temp & 1;
-          obj["blend"] = blend = (temp >> 1) & 1;
+          obj["dispose"] = temp & 1;
+          obj["blend"] = (temp >> 1) & 1;
           break;
       }
       if (fourcc != "ANMF") src_off += payload_size_padded;
@@ -26044,7 +26034,7 @@ WebPDecoder.prototype.getData = function() {
 (function(jsPDFAPI) {
 
   jsPDFAPI.processWEBP = function(imageData, index, alias, compression) {
-    var reader = new WebPDecoder(imageData, false);
+    var reader = new WebPDecoder(imageData);
     var width = reader.width,
       height = reader.height;
     var qu = 100;
@@ -30945,11 +30935,11 @@ WebPDecoder.prototype.getData = function() {
 
   var bidiEngineFunction = function(args) {
     var text = args.text;
-    var x = args.x;
-    var y = args.y;
+    args.x;
+    args.y;
     var options = args.options || {};
-    var mutex = args.mutex || {};
-    var lang = options.lang;
+    args.mutex || {};
+    options.lang;
     var tmpText = [];
 
     options.isInputVisual =
@@ -32866,6 +32856,6 @@ exports.AcroFormTextField = AcroFormTextField;
 exports.GState = GState;
 exports.ShadingPattern = ShadingPattern;
 exports.TilingPattern = TilingPattern;
-exports.default = jsPDF;
+exports["default"] = jsPDF;
 exports.jsPDF = jsPDF;
 //# sourceMappingURL=jspdf.node.js.map
